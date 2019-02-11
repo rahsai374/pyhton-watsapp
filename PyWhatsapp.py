@@ -31,32 +31,32 @@ def input_contacts():
     unsaved_Contacts = []
     while True:
         # Enter your choice 1 or 2
-        print("PLEASE CHOOSE ONE OF THE OPTIONS:\n")
-        print("1.Message to Saved Contact number")
-        print("2.Message to Unsaved Contact number\n")
-        x = int(input("Enter your choice(1 or 2):\n"))
-        print()
-        if x == 1:
-            n = int(input('Enter number of Contacts to add(count)->'))
-            print()
-            for i in range(0,n):
-                inp = str(input("Enter contact name(text)->"))
-                inp = '"' + inp + '"'
-                # print (inp)
-                Contact.append(inp)
-        elif x == 2:
-            n = int(input('Enter number of unsaved Contacts to add(count)->'))
-            print()
-            for i in range(0,n):
-                # Example use: 919899123456, Don't use: +919899123456
-                # Reference : https://faq.whatsapp.com/en/android/26000030/
-                inp = str(input("Enter unsaved contact number with country code(interger):\n\nValid input: 91943xxxxx12\nInvalid input: +91943xxxxx12\n\n"))
-                # print (inp)
-                unsaved_Contacts.append(inp)
+        # print("PLEASE CHOOSE ONE OF THE OPTIONS:\n")
+        # print("1.Message to Saved Contact number")
+        # print("2.Message to Unsaved Contact number\n")
+        # x = int(input("Enter your choice(1 or 2):\n"))
+        # print()
+        # if x == 1:
+        #     n = int(input('Enter number of Contacts to add(count)->'))
+        #     print()
+        #     for i in range(0,n):
+        #         inp = str(input("Enter contact name(text)->"))
+        #         inp = '"' + inp + '"'
+        #         # print (inp)
+        #         Contact.append(inp)
+        # elif x == 2:
+        #     n = int(input('Enter number of unsaved Contacts to add(count)->'))
+        #     print()
+        #     for i in range(0,n):
+        #         # Example use: 919899123456, Don't use: +919899123456
+        #         # Reference : https://faq.whatsapp.com/en/android/26000030/
+        inp = str(input("Enter unsaved contact number with country code(interger):\n\nValid input: 91943xxxxx12\nInvalid input: +91943xxxxx12\n\n"))
+        print (inp)
+        unsaved_Contacts.append(inp)
 
-        choi = input("Do you want to add more contacts(y/n)->")
-        if choi == "n":
-            break
+        # choi = input("Do you want to add more contacts(y/n)->")
+        # if choi == "n":
+        break
 
     if len(Contact) != 0:
         print("\nSaved contacts entered list->",Contact)
@@ -86,10 +86,11 @@ def input_message():
 
 def whatsapp_login():
     global wait,browser,Link
+    # chromedriver = "/path/to/chromedriver/folder"
     browser = webdriver.Chrome()
     wait = WebDriverWait(browser, 600)
     browser.get(Link)
-    browser.maximize_window()
+    # browser.maximize_window()
     print("QR scanned")
 
 def send_message(target):
@@ -219,23 +220,6 @@ def sender():
                     print('Files not sent')
             time.sleep(7)
 
-# For GoodMorning Image and Message
-schedule.every().day.at("07:00").do( sender )
-# For How are you message
-schedule.every().day.at("13:35").do( sender )
-# For GoodNight Image and Message
-schedule.every().day.at("22:00").do( sender )
-
-# Example Schedule for a particular day of week Monday
-schedule.every().monday.at("08:00").do(sender)
-
-
-# To schedule your msgs
-def scheduler():
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-
 if __name__ == "__main__":
 
     print("Web Page Open")
@@ -248,14 +232,14 @@ if __name__ == "__main__":
     # If you want to schedule messages for
     # a particular timing choose yes
     # If no choosed instant message would be sent
-    isSchedule = input('Do you want to schedule your Message(yes/no):')
+    isSchedule = 'n' # input('Do you want to schedule your Message(yes/no):')
     if(isSchedule=="yes"):
         jobtime = input('input time in 24 hour (HH:MM) format - ')
 
     #Send Attachment Media only Images/Video
-    choice = input("Would you like to send attachment(yes/no): ")
+    choice = 'n' # input("Would you like to send attachment(yes/no): ")
 
-    docChoice = input("Would you file to send a Document file(yes/no): ")
+    docChoice = 'n' # input("Would you file to send a Document file(yes/no): ")
     if(docChoice == "yes"):
         # Note the document file should be present in the Document Folder
         doc_filename = input("Enter the Document file name you want to send: ")
@@ -264,12 +248,6 @@ if __name__ == "__main__":
     print("SCAN YOUR QR CODE FOR WHATSAPP WEB")
     whatsapp_login()
 
-    # Send message to all Contact List
-    # This sender is just for testing purpose to check script working or not.
-    # Scheduling works below.
-    # sender()
-    # Uncomment line 236 is case you want to test the program
-
     if(isSchedule=="yes"):
         schedule.every().day.at(jobtime).do(sender)
     else:
@@ -277,11 +255,5 @@ if __name__ == "__main__":
 
     # First time message sending Task Complete
     print("Task Completed")
-
-    # Messages are scheduled to send
-    # Default schedule to send attachment and greet the personal
-    # For GoodMorning, GoodNight and howareyou wishes
-    # Comment in case you don't want to send wishes or schedule
-    scheduler()
 
     # browser.quit()
