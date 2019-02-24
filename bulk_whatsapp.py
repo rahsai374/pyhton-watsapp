@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
-import urllib
+from urllib import parse
 
 try:
     import autoit
@@ -14,30 +14,33 @@ except:
     pass
 import time
 
-browser = None
-wait = None
+browser = webdriver.Chrome()
+wait = WebDriverWait(browser, 10)
 Link = "https://web.whatsapp.com/"
 
 def whatsapp_login():
     global wait,browser,Link
     # chromedriver = "/path/to/chromedriver/folder"
-    browser = webdriver.Chrome()
-    wait = WebDriverWait(browser, 600)
     browser.get(Link)
     # browser.maximize_window()
     print("QR scanned")
 
 
-def send_unsaved_contact_message(message):
+def send_unsaved_contact_message(message, order_link):
     try:
-        time.sleep(7)
-        # message = urllib.parse.unquote(message)
-        input_box = browser.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')
+        input_box = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="main"]/footer/div[1]/div[2]/div/div[2]')))
         for ch in message:
             if ch == "\n":
                 ActionChains(browser).key_down(Keys.SHIFT).key_down(Keys.ENTER).key_up(Keys.ENTER).key_up(Keys.SHIFT).key_up(Keys.BACKSPACE).perform()
             else:
                 input_box.send_keys(ch)
+        ActionChains(browser).key_down(Keys.SHIFT).key_down(Keys.ENTER).key_up(Keys.ENTER).key_up(Keys.SHIFT).key_up(Keys.BACKSPACE).perform()
+        for ch in order_link:
+            if ch == "\n":
+                ActionChains(browser).key_down(Keys.SHIFT).key_down(Keys.ENTER).key_up(Keys.ENTER).key_up(Keys.SHIFT).key_up(Keys.BACKSPACE).perform()
+            else:
+                input_box.send_keys(ch)
+        time.sleep(3)
         input_box.send_keys(Keys.ENTER)
         print("Message sent successfuly")
     except NoSuchElementException:
@@ -54,15 +57,15 @@ def send_using_csv():
             modified_link = link.split('=')[:-1]
             modified_link = (',').join(modified_link)
             browser.get(modified_link)
-            wait = WebDriverWait(browser, 300)
-            time.sleep(2)
-            browser.find_element_by_xpath('//*[@id="action-button"]').click()
-            time.sleep(4)
+            element = wait.until(EC.presence_of_element_located((By.ID, 'action-button')))
+            element.click()
             print("Sending message to", link)
-            message = link.split('=')[-1]
+            query_params = dict(parse.parse_qsl(parse.urlsplit(link).query))
+            message = query_params['text']
+            order_link = query_params['order_link']
             # make sure text message is last part of link
-            send_unsaved_contact_message(message)
-            time.sleep(7)
+            send_unsaved_contact_message(message, order_link)
+            time.sleep(1)
 
 if __name__ == "__main__":
 
