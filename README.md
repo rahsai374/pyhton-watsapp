@@ -1,5 +1,5 @@
-# PyWhatsapp
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://github.com/shauryauppal/PyWhatsapp)  [![License](https://img.shields.io/github/license/shauryauppal/PyWhatsapp.svg)](https://github.com/shauryauppal/PyWhatsapp/blob/master/LICENSE) [![GitHub stars](https://img.shields.io/github/stars/shauryauppal/PyWhatsapp.svg)](https://github.com/shauryauppal/PyWhatsapp/stargazers)  [![HitCount](http://hits.dwyl.io/shauryauppal/PyWhatsapp.svg)](http://hits.dwyl.io/shauryauppal/PyWhatsapp)
+
+Documentation from repo which is used as base and modified as per the my perosnal use cases for sending out bulk messages
 
 ## Python Automation using Selenium &amp; Scheduling of messages and media
 
@@ -161,29 +161,4 @@ src="https://raw.githubusercontent.com/shauryauppal/PyWhatsapp/master/Input_Type
 <img
 src="https://raw.githubusercontent.com/shauryauppal/PyWhatsapp/master/Media/Demo.gif" height=400 width=400/>
 
----
 
-## Contributions
-<a href="https://github.com/shauryauppal/PyWhatsapp/issues"> Issues </a>
-and <a href ="https://github.com/shauryauppal/PyWhatsapp/pulls"> Pull
-requests </a> are most welcome.
-
----
-## License
-License
-Code and documentation are available according to the Apache License
-(see <a
-href="https://github.com/shauryauppal/PyWhatsapp/blob/master/LICENSE">LICENSE</a>).
-
----
-
-## Author:
-## <a href="https://www.linkedin.com/in/shaurya-uppal/">Shaurya Uppal</a>
-
-shauryauppal00111@gmail.com
-
-Feel free to mail me for any queries (After you have tried finding your
-solution).
-
-#### If this helped you in any way gift me a cup of coffee :coffee:
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UXSREFS2VFSWU)
